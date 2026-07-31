@@ -8,7 +8,7 @@ defineProps({
         type: String,
         default: 'Lorem Ipsum',
     },
-    url: {
+    imgurl: {
         type: String,
     },
     alt: {
@@ -27,13 +27,15 @@ defineProps({
 </script>
 
 <template>
-    <div class="card lg:card-side bg-base-100 shadow-sm">
-        <figure>
+    <div class="card bg-base-100 shadow-xl h-100 flex flex-col justify-between">
+        <figure class="h-48 w-full shrink-0 overflow-hidden">
             <img
-                :src="url"
-                :alt="alt" />
+                :src="imgurl"
+                :alt="alt"
+                class="w-full h-full object-cover"
+            />
         </figure>
-        <div class="card-body">
+        <div class="card-body flex flex-col justify-between flex-grow">
             <h2 class="card-title">{{ title }}</h2>
             <p>{{ text }}</p>
             <div class="card-actions justify-end">

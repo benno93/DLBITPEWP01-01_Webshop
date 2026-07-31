@@ -25,7 +25,7 @@ export default {
 
     // Optional: DaisyUI Themes konfigurieren
     daisyui: {
-        // themes: ["light"],
-         themes: ["light", "dark", "cupcake"],
+         themes: ["light"],
+        // themes: ["light", "dark", "cupcake"],
     },
 };
