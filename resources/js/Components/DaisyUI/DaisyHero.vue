@@ -1,63 +1,36 @@
 <script setup>
 defineProps({
-    title: {
-        type: String,
-        required: true,
-    },
-    text: {
-        type: String,
-        required: true,
-    },
-    backgroundImage: {
-        type: String,
-        default: 'https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp',
-    },
-    buttonText: {
-        type: String,
-        required: true,
-        default: 'Hallo, Welt!',
-    },
-    buttonTo: {
-        type: String,
-        default: '/',
-    }
-})
+    title: { type: String, required: true },
+    subtitle: { type: String, required: true },
+    buttonText: { type: String, default: 'Mehr erfahren' },
+    buttonHref: { type: String, default: '#' },
+    bgImage: { type: String, default: '' },
+});
 </script>
 
 <template>
     <div
-        class="hero min-h-screen"
-        :style="{ backgroundImage: `url(${backgroundImage})` }"
+        class="hero min-h-[70vh] relative bg-cover bg-center bg-gray-900 text-white"
+        :style="bgImage ? { backgroundImage: `url(${bgImage})` } : {}"
     >
-        <div class="hero-overlay"></div>
-        <div class="hero-content text-neutral-content text-center">
-            <div class="max-w-md">
-                <h1 class="mb-5 text-5xl font-bold">{{ title }}</h1>
-                <p class="mb-5">
-                    {{ text }}
+        <!-- Dunkles Overlay für bessere Lesbarkeit -->
+        <div class="hero-overlay bg-opacity-60 bg-black"></div>
+
+        <div class="hero-content text-center text-neutral-content z-10 py-16">
+            <div class="max-w-2xl">
+                <h1 class="mb-5 text-4xl md:text-6xl font-extrabold tracking-tight">
+                    {{ title }}
+                </h1>
+                <p class="mb-8 text-lg md:text-xl font-light">
+                    {{ subtitle }}
                 </p>
-                <RouterLink :to="buttonTo" class="btn btn-primary">
+                <a
+                    :href="buttonHref"
+                    class="btn btn-primary px-8 text-white text-base shadow-lg"
+                >
                     {{ buttonText }}
-                </RouterLink>
+                </a>
             </div>
         </div>
     </div>
 </template>
-
-<style scoped>
-p,h1 {
-    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-    paint-order: stroke fill;
-}
-
-.hero-overlay {
-    /* Erzeugt einen Verlauf von Schwarz (unten/links) nach Transparent */
-    background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(0, 0, 0, 0) 100%
-    ),
-    url('dein-bild.jpg');
-    background-size: cover;
-}
-</style>

@@ -4,18 +4,16 @@ import Footer from '@/Components/Layout/Footer.vue';
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col">
-        <!-- Fixierter Header Container -->
-        <header class="sticky top-0 z-50 w-full">
-            <Navbar />
-        </header>
+    <div class="min-h-screen flex flex-col bg-gray-50 text-gray-900 antialiased">
+        <!-- Top Navigation -->
+        <Navbar />
 
-        <main class="flex-1 flex items-center justify-center">
-            <div class="w-full max-w-7xl mx-auto px-4 py-8 flex flex-col items-center text-center">
-                <slot />
-            </div>
+        <!-- Main Content Area: Flex-1 sorgt dafür, dass der Footer immer unten klebt -->
+        <main class="flex-1 w-full">
+            <slot />
         </main>
 
+        <!-- Footer -->
         <Footer />
     </div>
 </template>

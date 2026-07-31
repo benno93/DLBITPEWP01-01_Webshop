@@ -1,41 +1,58 @@
 <script setup>
-import ShopLayout from "@/Layouts/ShopLayout.vue";
-import { Head } from '@inertiajs/vue3'
-import DaisyHero from "@/Components/DaisyUI/DaisyHero.vue";
-import DaisyCard from "@/Components/DaisyUI/DaisyCard.vue";
+import ShopLayout from '@/Layouts/ShopLayout.vue';
+import DaisyHero from '@/Components/DaisyUI/DaisyHero.vue';
+import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
 </script>
 
 <template>
     <ShopLayout>
+        <!-- 1. HERO BANNER -->
+        <DaisyHero
+            title="Willkommen im Shop"
+            subtitle="Entdecken Sie professionell aufbereitete Laptops aller namhaften Hersteller."
+            buttonText="Zu den Produkten"
+            buttonHref="#categories"
+            bgImage="/images/hero-bg.png"
+        />
 
-            <DaisyHero class="min-h-[25vh]"
-                title="Willkommen im Shop"
-                text="Entdecken sie profesionell aufbereitete Laptops aller namenhaften Hersteller."
-                buttonText="Zu den Produkten"
-                buttonTo="/Pages/Products/Index"
-                background-image="images/hero-bg.png"
-            />
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-                <div class="flex-1">
-                    <DaisyCard
-                        title="Entdecke unsere MacBooks"
-                        text=""
-                        btnText="Weiter"
-                        imgurl="https://www.selfdirection.org/wp-content/uploads/2023/11/macbook-air-m1.jpeg"
-                    />
-                </div>
-
-                <div class="flex-1">
-                    <DaisyCard
-                        title="Entdecke unsere ThinkPads"
-                        text=""
-                        btnText="Weiter"
-                        imgurl="https://static1.xdaimages.com/wordpress/wp-content/uploads/2023/03/lenovo-thinkpad-t14s-gen-4-deep-black.png"
-                    />
-                </div>
+        <!-- 2. KATEGORIEN / HIGHLIGHTS -->
+        <section id="categories" class="container mx-auto px-6 py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Unsere Kategorien</h2>
+                <p class="text-gray-500 mt-2">Finden Sie das passende Gerät für Ihren Anspruch</p>
             </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- MacBook Card -->
+                <DaisyCard
+                    title="Entdecke unsere MacBooks"
+                    description="Leistungsstarke Apple Laptops für kreative & professionelle Workflow-Anforderungen."
+                    imageSrc="/storage/macbook.png"
+                    imageAlt="MacBooks"
+                    buttonText="Kategorie ansehen"
+                    buttonHref="/produkte?category=macbook"
+                />
 
+                <!-- ThinkPad Card -->
+                <DaisyCard
+                    title="Entdecke unsere ThinkPads"
+                    description="Zuverlässige Business-Klassiker von Lenovo für mobiles & robustes Arbeiten."
+                    imageSrc="/storage/thinkpad.png"
+                    imageAlt="ThinkPads"
+                    buttonText="Kategorie ansehen"
+                    buttonHref="/produkte?category=thinkpad"
+                />
+
+                <!-- HP Card -->
+                <DaisyCard
+                    title="Entdecke unsere HP-Laptops"
+                    description="Zuverlässige Business-Klassiker von HP für mobiles & robustes Arbeiten."
+                    imageSrc="/storage/thinkpad.png"
+                    imageAlt="HP"
+                    buttonText="Kategorie ansehen"
+                    buttonHref="/produkte?category=hp"
+                />
+            </div>
+        </section>
     </ShopLayout>
 </template>
