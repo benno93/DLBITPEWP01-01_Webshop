@@ -30,6 +30,11 @@ Route::get('/about', function () {
     return Inertia::render('About');
 })->name('About');
 
+// Catalog
+Route::get('/catalog', function () {
+    return Inertia::render('Catalog');
+})->name('Catalog');
+
 
 // Default von Phpstorm:
 Route::get('/dashboard', function () {

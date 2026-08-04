@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="card bg-base-100 border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+    <div class="card bg-base-100 border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:scale-105">
         <!-- Bildbereich -->
         <figure class="px-6 pt-6 h-52 bg-gray-50 flex items-center justify-center">
             <img

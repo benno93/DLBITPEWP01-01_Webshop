@@ -25,7 +25,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- MacBook Card -->
                 <DaisyCard
-                    title="Entdecke unsere MacBooks"
+                    title="MacBooks"
                     description="Leistungsstarke Apple Laptops für kreative & professionelle Workflow-Anforderungen."
                     imageSrc="/images/mb_start.png"
                     imageAlt="MacBooks"
@@ -35,7 +35,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
 
                 <!-- ThinkPad Card -->
                 <DaisyCard
-                    title="Entdecke unsere ThinkPads"
+                    title="ThinkPads"
                     description="Zuverlässige Business-Klassiker von Lenovo für mobiles & robustes Arbeiten."
                     imageSrc="/images/thinkpad_start.png"
                     imageAlt="ThinkPads"
@@ -45,7 +45,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
 
                 <!-- HP Card -->
                 <DaisyCard
-                    title="Entdecke unsere HP-Laptops"
+                    title="HP-Laptops"
                     description="Zuverlässige Business-Klassiker von HP für mobiles & robustes Arbeiten."
                     imageSrc="/images/hp_start.png"
                     imageAlt="HP"
@@ -55,7 +55,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
 
                 <!-- HP Card -->
                 <DaisyCard
-                    title="Entdecke unsere Microsoft Surfaces"
+                    title="Microsoft Surfaces"
                     description="Klassische Ultrabooks mit exzellenten Tastaturen, hochauflösenden Touchscreens im 3:2-Format (sehr angenehm zum Arbeiten) und starker Akkulaufzeit."
                     imageSrc="/images/surface_start.png"
                     imageAlt="Microsoft Surface"
