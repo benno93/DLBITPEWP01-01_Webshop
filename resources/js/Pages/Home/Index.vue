@@ -27,7 +27,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
                 <DaisyCard
                     title="Entdecke unsere MacBooks"
                     description="Leistungsstarke Apple Laptops für kreative & professionelle Workflow-Anforderungen."
-                    imageSrc="/storage/macbook.png"
+                    imageSrc="/images/mb_start.png"
                     imageAlt="MacBooks"
                     buttonText="Kategorie ansehen"
                     buttonHref="/produkte?category=macbook"
@@ -37,7 +37,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
                 <DaisyCard
                     title="Entdecke unsere ThinkPads"
                     description="Zuverlässige Business-Klassiker von Lenovo für mobiles & robustes Arbeiten."
-                    imageSrc="/storage/thinkpad.png"
+                    imageSrc="/images/thinkpad_start.png"
                     imageAlt="ThinkPads"
                     buttonText="Kategorie ansehen"
                     buttonHref="/produkte?category=thinkpad"
@@ -47,7 +47,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
                 <DaisyCard
                     title="Entdecke unsere HP-Laptops"
                     description="Zuverlässige Business-Klassiker von HP für mobiles & robustes Arbeiten."
-                    imageSrc="/storage/thinkpad.png"
+                    imageSrc="/images/hp_start.png"
                     imageAlt="HP"
                     buttonText="Kategorie ansehen"
                     buttonHref="/produkte?category=hp"
@@ -57,7 +57,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
                 <DaisyCard
                     title="Entdecke unsere Microsoft Surfaces"
                     description="Klassische Ultrabooks mit exzellenten Tastaturen, hochauflösenden Touchscreens im 3:2-Format (sehr angenehm zum Arbeiten) und starker Akkulaufzeit."
-                    imageSrc="/storage/surface.png"
+                    imageSrc="/images/surface_start.png"
                     imageAlt="Microsoft Surface"
                     buttonText="Kategorie ansehen"
                     buttonHref="/produkte?category=surfaces"
