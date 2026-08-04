@@ -52,6 +52,16 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
                     buttonText="Kategorie ansehen"
                     buttonHref="/produkte?category=hp"
                 />
+
+                <!-- HP Card -->
+                <DaisyCard
+                    title="Entdecke unsere Microsoft Surfaces"
+                    description="Klassische Ultrabooks mit exzellenten Tastaturen, hochauflösenden Touchscreens im 3:2-Format (sehr angenehm zum Arbeiten) und starker Akkulaufzeit."
+                    imageSrc="/storage/surface.png"
+                    imageAlt="Microsoft Surface"
+                    buttonText="Kategorie ansehen"
+                    buttonHref="/produkte?category=surfaces"
+                />
             </div>
         </section>
     </ShopLayout>

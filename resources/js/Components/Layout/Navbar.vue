@@ -1,9 +1,9 @@
 <script setup>
-
+import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar bg-base-100 shadow-sm sticky top-0 z-50">
         <!-- Linker Bereich mit Logo -->
         <div class="flex-1">
             <a class="btn btn-ghost text-xl">Webshop</a>
@@ -12,10 +12,14 @@
         <!-- Mittlerer Bereich mit den Menüpunkten -->
         <div class="flex-none">
             <ul class="menu menu-horizontal px-1">
-                <li><a>Startseite</a></li>
+                <li>
+                    <Link href="/">Startseite</Link>
+                </li>
                 <li><a>Kategorien</a></li>
                 <li><a>Produkte</a></li>
-                <li><a>Über</a></li>
+                <li>
+                    <Link href="/about">Über uns</Link>
+                </li>
             </ul>
         </div>
 

@@ -25,6 +25,11 @@ Route::get('/cart', function () {
     return Inertia::render('Cart/Index');
 });
 
+// About -> Hier richtig!!
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('About');
+
 
 // Default von Phpstorm:
 Route::get('/dashboard', function () {
