@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
-{
-    //
+class Payment extends Model {
+    public $timestamps = false;
+    protected $fillable = ['order_id', 'method', 'status', 'payment_date'];
+    protected $casts = ['payment_date' => 'datetime'];
+    public function order() { return $this->belongsTo(Order::class); }
 }
