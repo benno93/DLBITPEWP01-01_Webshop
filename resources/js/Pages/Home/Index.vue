@@ -10,7 +10,7 @@ import DaisyCard from '@/Components/DaisyUI/DaisyCard.vue';
         <DaisyHero
             title="Willkommen im Shop"
             subtitle="Entdecken Sie professionell aufbereitete Laptops aller namhaften Hersteller."
-            buttonText="Zu den Produkten"
+            buttonText="Kategorien entdecken ↓"
             buttonHref="#categories"
             bgImage="/images/hero-bg.png"
         />

@@ -15,8 +15,7 @@ import { Link } from '@inertiajs/vue3';
                 <li>
                     <Link href="/">Startseite</Link>
                 </li>
-                <li><a>Kategorien</a></li>
-                <li><a>Produkte</a></li>
+                <li><a>Katalog</a></li>
                 <li>
                     <Link href="/about">Über uns</Link>
                 </li>
