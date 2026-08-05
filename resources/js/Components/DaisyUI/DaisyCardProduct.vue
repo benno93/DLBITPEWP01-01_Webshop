@@ -1,20 +1,26 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+
 defineProps({
-    name: {type: String, required: true},
-    price: {type: Number, required: true},
-    stock: {type: Number, required: true},
-    category: {type: String, required: true},
+    product: {
+        type: Object,
+        required: true
+    }
 })
 </script>
 
 <template>
     <div class="card card-border bg-base-100 w-96">
         <div class="card-body">
-            <h2 class="card-title">{{ name }}</h2>
+            <h2 class="card-title"><strong> {{ product.name }} </strong></h2>
+
+            <span class="badge badge-outline">
+                {{ product.category?.name }}
+            </span>
+
             <p>
-                Preis: {{ price }} <br>
-                Noch verfügbar: {{ stock }}
+                Preis {{ product.price }} € <br>
+                Noch verfügbar: {{ product.stock }}
             </p>
             <div class="card-actions justify-end">
                 <button class="btn btn-primary">In den Warenkorb</button>
@@ -22,7 +28,3 @@ defineProps({
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -4,16 +4,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Product;
 
 // Startseite
 Route::get('/', function () {
     return Inertia::render('Home/Index'); // ← Neuer Pfad
 })->name('Home');
 
-// Produkt-Übersicht
-Route::get('/products', function () {
-    return Inertia::render('Products/Index');
-});
 
 // Einzelnes Produkt
 Route::get('/products/{id}', function ($id) {
@@ -32,7 +29,10 @@ Route::get('/about', function () {
 
 // Catalog
 Route::get('/catalog', function () {
-    return Inertia::render('Catalog');
+    return Inertia::render('Catalog', [
+        // 'with' lädt die Relation. 'get()' führt die Abfrage dann aus.
+        'products' => Product::with('category')->get()
+    ]);
 })->name('Catalog');
 
 
