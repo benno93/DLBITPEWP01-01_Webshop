@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $category4 = Category::create([
-            'name' => 'Surface'
+            'name' => 'Microsoft'
         ]);
 
         Product::create([
