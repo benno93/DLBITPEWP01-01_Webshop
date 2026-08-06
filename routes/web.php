@@ -12,10 +12,15 @@ Route::get('/', function () {
 })->name('Home');
 
 
-// Einzelnes Produkt
-Route::get('/products/{id}', function ($id) {
-    return Inertia::render('Products/Show', ['id' => $id]);
-});
+// Route für ein einzelnes Produkt
+Route::get('/products/{product}', function ($id) {
+    // Rendert `resources/js/Pages/Product.vue` und lädt die Daten inklusive Kategorie
+    $product = \App\Models\Product::with('category')->findOrFail($id);
+
+    return Inertia::render('Product', [
+        'product' => $product
+    ]);
+})->name('product.show');
 
 // Warenkorb
 Route::get('/cart', function () {

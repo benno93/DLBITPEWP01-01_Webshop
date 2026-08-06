@@ -13,6 +13,17 @@ defineProps({
     <!-- Karte: Feste Breite (w-96) entfernt, Hover-Effekte und sanfte Schatten hinzugefügt -->
     <div class="card bg-base-100 shadow-md border border-base-200 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
 
+        <!-- Bild verlinken -->
+        <figure class="px-4 pt-4">
+            <Link :href="route('product.show', product.id)">
+                <img
+                    :src="product.image_url ?? 'images/placeholder.png'"
+                    :alt="product.name"
+                    class="rounded-xl object-cover h-48 w-full hover:opacity-90 transition-opacity"
+                />
+            </Link>
+        </figure>
+
         <div class="card-body p-5">
             <!-- Titel und Badge in einer Zeile (flex) -->
             <div class="flex justify-between items-start gap-2 mb-2">
