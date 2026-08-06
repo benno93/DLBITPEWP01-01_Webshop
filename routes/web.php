@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 // Startseite
 Route::get('/', function () {
@@ -57,7 +58,9 @@ Route::middleware('auth')->group(function () {
 // Auth
 require __DIR__.'/auth.php';
 
-// Dummy Checkout-Route (damit route('Checkout') im Frontend nicht abstürzt)
-Route::get('/checkout', function () {
-    return Inertia::render('Checkout');
-})->name('Checkout');
+// Checkout: erfordert Login, da Bestellungen fest an einen Benutzer gebunden sind
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('Checkout');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
+});

@@ -80,12 +80,6 @@ function submit() {
         return;
     }
 
-    // Der eigentliche Bestell-Endpunkt wird im nächsten Ausbauschritt angebunden.
-    if (!route().has('checkout.store')) {
-        alert('Die Anbindung an den Server folgt im nächsten Schritt. Das Formular ist bereits vollständig vorbereitet.');
-        return;
-    }
-
     form.post(route('checkout.store'));
 }
 </script>
@@ -321,6 +315,10 @@ function submit() {
 
                     <!-- Call-to-Action: Rechtliches & Bestellbutton -->
                     <section class="bg-white rounded-lg shadow-lg border-2 border-primary p-6 md:p-8 space-y-6">
+                        <div v-if="form.errors.stock" class="alert alert-error text-sm">
+                            {{ form.errors.stock }}
+                        </div>
+
                         <div class="space-y-3">
                             <label class="flex items-start gap-3 cursor-pointer">
                                 <input v-model="form.accept_terms" type="checkbox" required class="checkbox checkbox-primary mt-0.5" />
