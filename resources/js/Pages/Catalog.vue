@@ -42,11 +42,9 @@ const filteredProducts = computed(() => {
             return false;
         }
 
-        // 3. Lagerbestand-Filter (Integer > 0)
-        // Falls dein DB-Feld z.B. `stock_quantity` heißt, passe `product.stock` entsprechend an
+        // 3. Lagerbestand-Filter
         if (onlyInStock.value) {
-            const stockCount = product.stock ?? product.stock_quantity ?? product.quantity ?? 0;
-            if (stockCount <= 0) {
+            if (product.stock <= 0) {
                 return false;
             }
         }
