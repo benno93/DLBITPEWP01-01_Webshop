@@ -34,6 +34,10 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            // Warenkorb-Daten global bereitstellen
+            'cart' => function () {
+                return session()->get('cart', []);
+            },
         ];
     }
 }

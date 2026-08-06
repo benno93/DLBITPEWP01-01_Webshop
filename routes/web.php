@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Product;
+use App\Http\Controllers\CartController;
 
 // Startseite
 Route::get('/', function () {
@@ -22,10 +23,11 @@ Route::get('/products/{product}', function ($id) {
     ]);
 })->name('product.show');
 
-// Warenkorb
-Route::get('/cart', function () {
-    return Inertia::render('Cart/Index');
-});
+// Warenkorb über Controller aufrufen
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 // About -> Hier richtig!!
 Route::get('/about', function () {
@@ -54,3 +56,8 @@ Route::middleware('auth')->group(function () {
 
 // Auth
 require __DIR__.'/auth.php';
+
+// Dummy Checkout-Route (damit route('Checkout') im Frontend nicht abstürzt)
+Route::get('/checkout', function () {
+    return Inertia::render('Checkout');
+})->name('Checkout');

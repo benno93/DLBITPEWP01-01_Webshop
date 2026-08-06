@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import AddToCartButton from '@/Components/AddToCartButton.vue';
 
 defineProps({
     product: {
@@ -49,9 +50,11 @@ defineProps({
 
             <!-- Button nimmt jetzt die volle Breite ein oder ordnet sich elegant an -->
             <div class="card-actions justify-end mt-4">
-                <button class="btn btn-primary w-full" :disabled="product.stock <= 0">
-                    In den Warenkorb
-                </button>
+                <AddToCartButton
+                    :product-id="product.id"
+                    :stock="product.stock"
+                    custom-class="btn-primary btn-sm"
+                />
             </div>
         </div>
     </div>

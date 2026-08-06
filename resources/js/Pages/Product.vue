@@ -2,6 +2,11 @@
 import { Head, Link } from '@inertiajs/vue3';
 import ShopLayout from '@/Layouts/ShopLayout.vue';
 
+import { ref } from 'vue';
+import AddToCartButton from '@/Components/AddToCartButton.vue';
+
+const selectedQuantity = ref(1);
+
 defineProps({
     product: {
         type: Object,
@@ -58,9 +63,25 @@ defineProps({
                                         {{ product.stock > 0 ? `${product.stock} Stück auf Lager` : 'Nicht verfügbar' }}
                                     </span>
                                 </div>
-                                <button class="btn btn-primary w-full" :disabled="product.stock <= 0">
-                                    In den Warenkorb
-                                </button>
+                                <div class="flex gap-4 items-center">
+                                    <!-- Optionaler Mengenselektor -->
+                                    <input
+                                        type="number"
+                                        v-model.number="selectedQuantity"
+                                        min="1"
+                                        :max="product.stock"
+                                        class="input input-bordered w-20"
+                                    />
+
+                                    <AddToCartButton
+                                        :product-id="product.id"
+                                        :stock="product.stock"
+                                        :quantity="selectedQuantity"
+                                        custom-class="btn-primary btn-md flex-1"
+                                    >
+                                        {{ selectedQuantity }}x In den Warenkorb
+                                    </AddToCartButton>
+                                </div>
                             </div>
                         </div>
 
