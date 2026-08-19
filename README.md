@@ -1,62 +1,93 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# DLBITPEWP01-01 – Webshop
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Laravel 13 (PHP 8.4) / Inertia.js + Vue 3 / Vite. Diese README beschreibt, wie die Anwendung lokal gestartet wird und wie die Docker-Variante gebaut, gestartet und bei Änderungen aktualisiert wird.
 
-## About Laravel
+## Voraussetzungen
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Für die lokale Entwicklung: PHP 8.4 oder neuer, Composer 2.x, Node.js (empfohlen Version 18 oder neuer) mit npm, sowie Git. Für die Docker-Variante zusätzlich Docker – entweder Docker Desktop oder, wie in diesem Projekt verwendet, die Docker-CLI per Homebrew zusammen mit [Colima](https://github.com/abiosoft/colima) als Container-Runtime unter macOS. Der Docker-Daemon (bei Colima per `colima start`) muss laufen, bevor `docker`-Befehle funktionieren.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 1. Lokale Installation über das GitHub-Repository
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Repository klonen und in den Projektordner wechseln:
+   ```
+   git clone https://github.com/benno93/DLBITPEWP01-01_Webshop.git
+   cd DLBITPEWP01-01_Webshop
+   ```
 
-## Learning Laravel
+2. PHP-Abhängigkeiten installieren:
+   ```
+   composer install
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. Umgebungsdatei anlegen und Anwendungsschlüssel generieren:
+   ```
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. SQLite-Datenbankdatei anlegen und Migrationen samt Beispieldaten einspielen:
+   ```
+   touch database/database.sqlite
+   php artisan migrate --seed
+   ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+5. Frontend-Abhängigkeiten installieren:
+   ```
+   npm install
+   ```
 
-## Agentic Development
+6. Anwendung starten. Am einfachsten über den in `composer.json` hinterlegten Sammelbefehl, der PHP-Entwicklungsserver, Queue-Worker, Log-Ausgabe (Pail) und den Vite-Dev-Server gleichzeitig startet:
+   ```
+   composer run dev
+   ```
+   Alternativ einzeln in getrennten Terminals: `php artisan serve` und `npm run dev`.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+7. Im Browser `http://localhost:8000` aufrufen.
 
-```bash
-composer require laravel/boost --dev
+## 2. Docker: Anwendung starten
 
-php artisan boost:install
+Es gibt zwei Wege, die Anwendung per Docker zu starten:
+
+**A) Fertiges Image von Docker Hub verwenden (schnellster Weg, kein lokaler Build nötig)**
+```
+docker pull henningsander/webshop:latest
+docker run -p 8000:8000 henningsander/webshop:latest
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**B) Image selbst aus dem Dockerfile bauen**
+```
+docker build -t webshop .
+docker run -p 8000:8000 webshop
+```
+(Docker-Daemon muss laufen, siehe Voraussetzungen.)
 
-## Contributing
+In beiden Fällen ist die Anwendung danach unter `http://localhost:8000` erreichbar.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Der Container nutzt intern `php artisan serve` als Webserver – für lokales Ausprobieren/Testen völlig ausreichend, für echten Produktivbetrieb mit hoher Last wäre ein Setup mit separaten Containern für PHP-FPM, einen echten Webserver (Nginx) und eine externe Datenbank statt SQLite sinnvoller.
 
-## Code of Conduct
+## 3. Änderungen einpflegen (Code ändern & Docker neu bauen)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Das `Dockerfile` holt den Anwendungscode per `git clone` direkt von GitHub, **nicht** aus dem lokalen Projektordner. Eine Code-Änderung muss also zuerst ganz normal committet und gepusht werden, bevor sie im nächsten Docker-Build ankommt:
+```
+git add .
+git commit -m "Beschreibung der Änderung"
+git push
+```
 
-## Security Vulnerabilities
+Danach das Image neu bauen. Wichtig: Docker entscheidet anhand des *Texts* der Dockerfile-Befehle, ob ein Schritt aus dem Cache wiederverwendet wird – nicht danach, ob sich der Inhalt hinter einer URL (wie beim `git clone`) tatsächlich geändert hat. Ein einfaches `docker build -t webshop .` kann daher fälschlicherweise den alten, gecachten Repository-Stand wiederverwenden. Um das zu erzwingen, den Cache beim Neubau verwerfen:
+```
+docker build --no-cache -t webshop .
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Falls die Änderung auch im auf Docker Hub veröffentlichten Image ankommen soll, muss das neu gebaute Image zusätzlich erneut hochgeladen werden:
+```
+docker login
+docker tag webshop henningsander/webshop:latest
+docker push henningsander/webshop:latest
+```
 
-## License
+### Kurzer Überblick über die Funktionsweise des Dockerfiles
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# DLBITPEWP01-01_Webshop
->>>>>>> e041577ed93e4c9a59fe9aa75fc856c61dc81f18
+Als Basis dient `alpine:3.22`, ein schlankes Linux-Image, auf dem per `apk` (Alpines Paketmanager) PHP 8.4 samt der von Laravel benötigten Erweiterungen, Node.js/npm, Git und curl installiert werden. Composer wird bewusst nicht über das Alpine-Paket installiert, sondern offiziell per Installer-Skript direkt für PHP 8.4, um Versionskonflikte zu vermeiden. Anschließend wird der Anwendungscode per `git clone` von GitHub geholt, mit `composer install` und `npm install` werden die Abhängigkeiten installiert, `npm run build` kompiliert die Vite/Vue/Tailwind-Assets. Danach läuft die Laravel-Grundkonfiguration einmalig beim Image-Bau (`.env` anlegen, Anwendungsschlüssel generieren, SQLite-Datenbank anlegen, Migrationen und Seeder ausführen). Zum Schluss dokumentiert `EXPOSE 8000` den verwendeten Port, und `CMD` startet beim Containerstart den Laravel-Entwicklungsserver mit `--host=0.0.0.0`, damit er auch von außerhalb des Containers erreichbar ist. Die tatsächliche Portfreigabe nach außen passiert erst beim `docker run` über den Parameter `-p 8000:8000`.
+
+**Hinweis zu privaten Repositories**: Der `git clone`-Befehl im Dockerfile funktioniert nur, solange das GitHub-Repository öffentlich ist. Bei einem privaten Repo müsste stattdessen entweder ein Zugangstoken eingebunden werden (aus Sicherheitsgründen nicht empfohlen, falls das Image geteilt wird) oder der Code per `COPY . .` aus dem lokalen Build-Kontext übernommen werden.
