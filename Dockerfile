@@ -20,7 +20,7 @@
 # Wir pinnen eine konkrete Alpine-Version statt "alpine:latest", damit der
 # Build immer reproduzierbar ist (siehe Erklärung weiter oben im Chat: ohne
 # Tag würde automatisch ":latest" angenommen, das sich unbemerkt ändern kann).
-FROM alpine:3.20
+FROM alpine:3.22
 
 
 # -----------------------------------------------------------------------------
@@ -33,7 +33,7 @@ FROM alpine:3.20
 #
 # Installiert werden:
 #   - git                für "git clone" des Repos
-#   - php83 + Erweiterungen, die Laravel laut composer.json/Standardbetrieb
+#   - php84 + Erweiterungen, die Laravel laut composer.json/Standardbetrieb
 #                        braucht (pdo_sqlite, weil DB_CONNECTION=sqlite in
 #                        der .env.example steht; die anderen sind Laravel-
 #                        Kernanforderungen)
@@ -44,31 +44,38 @@ FROM alpine:3.20
 # "--no-cache" sorgt dafür, dass apk keinen lokalen Paket-Cache im Image-Layer
 # hinterlässt -> kleineres Image, kein separates "apk update" nötig davor.
 RUN apk update && apk add --no-cache \
+        curl \
         git \
-        php83 \
-        php83-pdo \
-        php83-pdo_sqlite \
-        php83-sqlite3 \
-        php83-mbstring \
-        php83-tokenizer \
-        php83-xml \
-        php83-dom \
-        php83-simplexml \
-        php83-xmlwriter \
-        php83-ctype \
-        php83-fileinfo \
-        php83-bcmath \
-        php83-session \
-        php83-openssl \
-        php83-phar \
-        php83-curl \
+        php84 \
+        php84-pdo \
+        php84-pdo_sqlite \
+        php84-sqlite3 \
+        php84-mbstring \
+        php84-iconv \
+        php84-tokenizer \
+        php84-xml \
+        php84-dom \
+        php84-simplexml \
+        php84-xmlwriter \
+        php84-ctype \
+        php84-fileinfo \
+        php84-bcmath \
+        php84-session \
+        php84-openssl \
+        php84-phar \
+        php84-curl \
         composer \
         nodejs \
         npm
 
-# Damit der Befehl im Container einfach "php" statt "php83" heißt
-# (Alpine installiert den Befehl unter dem Namen "php83").
-RUN ln -s /usr/bin/php83 /usr/bin/php
+# php84 explizit als Standard-"php"-Befehl setzen (mit -f überschreiben,
+# falls das Paket schon einen eigenen /usr/bin/php-Eintrag anlegt)
+RUN ln -sf /usr/bin/php84 /usr/bin/php
+
+# Composer NICHT über "apk add composer" installieren (das würde wieder
+# php83 als Abhängigkeit reinziehen), sondern offiziell per Installer-Skript,
+# das direkt mit unserem "php" (jetzt = php84) ausgeführt wird
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
 
 
 # -----------------------------------------------------------------------------
